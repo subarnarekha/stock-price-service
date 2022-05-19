@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class StockPriceDto {
 
-	private String id;
+	private int id_stock_price;
 	private String companyCode;
 	private double price;
 	private String date;
