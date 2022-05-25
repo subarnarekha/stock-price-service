@@ -1,7 +1,11 @@
 package com.cogjava535.stockpriceservice.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +33,32 @@ public class StockPriceServiceImpl implements StockPriceService {
 	}
 
 	@Override
-	public List<StockPriceDto> getStockPriceList(String companyCode, String startDate, String endDate) {
+	public List<StockPriceDto> getStockPriceList(String companyCode, String startDate, String endDate){
 		// TODO Auto-generated method stub
 		List<StockPriceDto> stockPriceObj = new ArrayList<>();
 		List<StockPrice> stockRes = stockRepo.findByCompanyCode(companyCode);
-		stockRes.forEach(obj -> stockPriceObj.add(objMapper.convertValue(obj, StockPriceDto.class)));		
+		
+		try {
+			Date fromDate = new SimpleDateFormat("dd-MM-yy").parse(startDate);
+			Date toDate = new SimpleDateFormat("dd-MM-yy").parse(endDate);
+			
+			List<StockPrice> stockResFiltered = stockRes.stream().filter(stockPrice->{
+				Date date = null;
+				try {
+					date = new SimpleDateFormat("dd-MM-yy").parse(stockPrice.getDate());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return date.after(fromDate) && date.before(toDate);
+			}).collect(Collectors.toList());
+		
+			stockRes.forEach(obj -> stockPriceObj.add(objMapper.convertValue(obj, StockPriceDto.class)));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return stockPriceObj;
 	}
 
