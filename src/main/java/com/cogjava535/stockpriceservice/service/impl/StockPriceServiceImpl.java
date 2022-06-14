@@ -41,19 +41,26 @@ public class StockPriceServiceImpl implements StockPriceService {
 		try {
 			Date fromDate = new SimpleDateFormat("dd-MM-yy").parse(startDate);
 			Date toDate = new SimpleDateFormat("dd-MM-yy").parse(endDate);
-			
+			System.out.println("list size :"+stockRes.size());
 			List<StockPrice> stockResFiltered = stockRes.stream().filter(stockPrice->{
 				Date date = null;
 				try {
-					date = new SimpleDateFormat("dd-MM-yy").parse(stockPrice.getDate());
-				} catch (ParseException e) {
+//					date = new SimpleDateFormat("dd-MM-yy").parse(stockPrice.getDate());
+					date = stockPrice.getDate();
+					System.out.println(date);
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				return date.after(fromDate) && date.before(toDate);
+				System.out.println(date);
+				System.out.println(fromDate);
+				System.out.println(toDate);
+				System.out.println(date.before(fromDate));				
+				System.out.println(date.after(toDate));
+				return date.before(fromDate) && date.after(toDate);
 			}).collect(Collectors.toList());
-		
-			stockRes.forEach(obj -> stockPriceObj.add(objMapper.convertValue(obj, StockPriceDto.class)));
+			System.out.println("Filetered list size :"+stockResFiltered.size());
+			stockResFiltered.forEach(obj -> stockPriceObj.add(objMapper.convertValue(obj, StockPriceDto.class)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
