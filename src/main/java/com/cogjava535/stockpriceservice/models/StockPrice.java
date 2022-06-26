@@ -1,6 +1,8 @@
 package com.cogjava535.stockpriceservice.models;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
+//import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,5 +34,5 @@ public class StockPrice {
 	private String companyCode;
 	private double price;
 	private Date date;
-	private Date time;
+	private Time time;
 }

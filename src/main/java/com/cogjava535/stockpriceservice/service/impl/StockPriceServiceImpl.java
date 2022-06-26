@@ -52,12 +52,12 @@ public class StockPriceServiceImpl implements StockPriceService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(date);
-				System.out.println(fromDate);
-				System.out.println(toDate);
-				System.out.println(date.before(fromDate));				
-				System.out.println(date.after(toDate));
-				return date.before(fromDate) && date.after(toDate);
+//				System.out.println(date);
+//				System.out.println(fromDate);
+//				System.out.println(toDate);
+//				System.out.println(date.before(toDate));				
+//				System.out.println(date.after(fromDate));
+				return date.before(toDate) && date.after(fromDate);
 			}).collect(Collectors.toList());
 			System.out.println("Filetered list size :"+stockResFiltered.size());
 			stockResFiltered.forEach(obj -> stockPriceObj.add(objMapper.convertValue(obj, StockPriceDto.class)));

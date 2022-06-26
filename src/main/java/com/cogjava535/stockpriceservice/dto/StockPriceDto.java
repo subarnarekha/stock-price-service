@@ -1,5 +1,8 @@
 package com.cogjava535.stockpriceservice.dto;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +17,6 @@ public class StockPriceDto {
 	private int id_stock_price;
 	private String companyCode;
 	private double price;
-	private String date;
-	private String time;
+	private Date date;
+	private Time time;
 }

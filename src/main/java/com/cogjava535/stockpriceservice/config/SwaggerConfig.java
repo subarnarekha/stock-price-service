@@ -22,7 +22,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket toDoApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("company-details-service")
+				.groupName("stock-price-service")
 				.apiInfo(apiInfo())
 				.select()
 				.paths(PathSelectors.any())
@@ -30,12 +30,12 @@ public class SwaggerConfig {
 	}
 	
 	private Predicate<String> postPaths(){
-		return or(regex("/company.*"),regex("*"));
+		return or(regex("/stock.*"),regex("*"));
 	}
 	
 	private ApiInfo apiInfo(){
 		return new ApiInfoBuilder()
-				.title("Company Details Service - Api for Stock Market Application")
+				.title("Stock Price Service - Api for Stock Market Application")
 				.description("Pulls company related details and managing company details endpoints")
 				.version("1.0")
 				.build();
