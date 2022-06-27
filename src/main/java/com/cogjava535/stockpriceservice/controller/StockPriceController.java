@@ -24,6 +24,11 @@ public class StockPriceController {
 	@Autowired
 	private StockPriceService stockPriceService;
 	
+	@GetMapping("/health")
+	public String health() {
+	  return "Hello, StockPriceService is up!!!";
+	}
+	
 	@PostMapping(path="/add/{companyCode}")
 	public ResponseEntity<?> addStock(@RequestBody StockPriceDto stockInput, @PathVariable String companyCode){
 		stockPriceService.addStockByCompanyCode(companyCode,stockInput);

@@ -1,0 +1,2 @@
+docker build -t stockprice .
+docker run -p 8743:8743 stockprice

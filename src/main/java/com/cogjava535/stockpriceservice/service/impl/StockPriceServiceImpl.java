@@ -1,7 +1,9 @@
 package com.cogjava535.stockpriceservice.service.impl;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +28,8 @@ public class StockPriceServiceImpl implements StockPriceService {
 	
 	@Override
 	public void addStockByCompanyCode(String companyCode, StockPriceDto stockInput) {
-		stockInput.setCompanyCode(companyCode);		
+		stockInput.setCompanyCode(companyCode);	
+		stockInput.setTime(Time.valueOf(LocalTime.now()));
 		StockPrice stockPriceObj = objMapper.convertValue(stockInput, StockPrice.class);		
 		stockRepo.save(stockPriceObj);
 		
