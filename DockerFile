@@ -1,3 +1,0 @@
-FROM openjdk:11-jdk
-COPY ./build/libs/stockprice-service-0.0.1-SNAPSHOT.jar stockprice-service-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java", "-jar","stockprice-service-0.0.1-SNAPSHOT.jar"]

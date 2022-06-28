@@ -1,2 +1,8 @@
-docker build -t stockprice .
+
+docker build -f /stockprice-service/Dockerfile -t fse/stock-service .
+
+docker tag fse/stock-service:latest 315632178359.dkr.ecr.ap-south-1.amazonaws.com/fse/stock-service:latest
+
+docker push 315632178359.dkr.ecr.ap-south-1.amazonaws.com/fse/stock-service:latest
+
 docker run -p 8743:8743 stockprice
